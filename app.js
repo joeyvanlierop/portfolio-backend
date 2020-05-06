@@ -12,9 +12,9 @@ app.use(cors());
 
 app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`));
 
-app.get("/", (req, res) => res.send("Hey! Listen!"));
+app.get("/api", (req, res) => res.send("Hey! Listen!"));
 
-app.post("/send", (req, res) => {
+app.post("/api/send", (req, res) => {
   console.log(`Received send email request. Body: ${JSON.stringify(req.body)}`);
   // var data = req.body;
 
