@@ -1,49 +1,19 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const nodemailer = require("nodemailer");
 const cors = require("cors");
+const express = require("express");
+const routes = require("./routes");
 
-const PORT = 3000;
+// Load Environment Variables
+require("dotenv").config();
 
+// Load port from environment variable
+// Default port is 3000
+const PORT = process.env.PORT || 3000;
+
+// Initialize express app
 const app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.json());
+app.use("/api", routes);
 
-app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`));
-
-app.get("/api", (req, res) => res.send("Hey! Listen!"));
-
-app.post("/api/send", (req, res) => {
-  console.log(`Received send email request. Body: ${JSON.stringify(req.body)}`);
-  // var data = req.body;
-
-  // var smtpTransport = nodemailer.createTransport({
-  //   service: "Gmail",
-  //   port: 465,
-  //   auth: {
-  //     user: "USERNAME",
-  //     pass: "PASSWORD",
-  //   },
-  // });
-
-  // var mailOptions = {
-  //   from: data.email,
-  //   to: "name@example.com",
-  //   subject: "Portfolio - Contact",
-  //   html: `<p>${data.name}</p>
-  //         <p>${data.email}</p>
-  //         <p>${data.message}</p>`,
-  // };
-
-  // smtpTransport.sendMail(mailOptions, (error, response) => {
-  //   if (error) {
-  //     res.send(error);
-  //   } else {
-  //     res.send("Success");
-  //   }
-  //   smtpTransport.close();
-  // });
-
-  setTimeout(() => res.send("Success"), 1500);
-});
+// Begin listening on the predefined port
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
