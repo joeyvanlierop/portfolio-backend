@@ -12,8 +12,8 @@ router.post("/", (req, res) => {
   //  - EMAIL_USER (The smtp username)
   //  - EMAIL_PASS (The smtp password)
   const auth = {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   };
 
   // The data posted from the contact form
